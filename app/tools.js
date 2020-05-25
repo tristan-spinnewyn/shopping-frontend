@@ -53,3 +53,8 @@ function getParameterByName(name) {
     let match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
+
+function logout(){
+    sessionStorage.removeItem("token")
+    window.location.replace("login.html")
+}

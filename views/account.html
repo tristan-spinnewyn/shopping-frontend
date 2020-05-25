@@ -1,0 +1,36 @@
+<div class="container">
+    <h3>Votre compte</h3>
+    <div>
+        <div class="row">
+            <form class="col s12" id="formAccount">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="fieldLogin" type="text" class="validate" value="">
+                        <label for="fieldLogin" class="active">Adresse e-mail</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="fieldPassword" type="password" class="validate">
+                        <label for="fieldPassword" class="active">Mot de passe</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="fieldPasswordConfirm" type="password" class="validate">
+                        <label for="fieldPasswordConfirm" class="active">Confirmer votre nouveau mot de passe</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <form class="col s12" id="verifPwd">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="fieldOldPassword" type="password" class="validate">
+                        <label for="fieldOldPassword" class="active">Entre votre mot de passe actuel</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <a class="waves-effect waves-light btn" onclick="accountController.save()"><i class="material-icons right">check</i>Mettre à jour</a>
+        </div>
+    </div>
+</div>

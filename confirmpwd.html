@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Connexion shopping</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="res/css/index.css"/>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper">
+        <a href="javascript:void(0);" onclick="window.location.replace('login.html')" class="brand-logo" id="titleSite"></a>
+        <a href="javascript:void(0);" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="javascript:void(0);" onclick="window.location.replace('login.html')">Connexion</a></li>
+            <li><a href="javascript:void(0);" onclick="window.location.replace('register.html')">S'enregistrer</a></li>
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="javascript:void(0);" onclick="window.location.replace('login.html')">Connexion</a></li>
+    <li><a href="javascript:void(0);" onclick="window.location.replace('register.html')">S'enregistrer</a></li>
+</ul>
+<div class="container">
+    <h3>Changement de mot de passe</h3>
+    <div>
+        <div class="row">
+            <form class="col s12" id="formLogin">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="fieldPassword" type="password" class="validate">
+                        <label for="fieldPassword" class="active">Mot de passe</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="fieldPasswordConfirm" type="password" class="validate">
+                        <label for="fieldPasswordConfirm" class="active">Confirmer votre mot de passe</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <a class="waves-effect waves-light btn" onclick="askResetPwdController.changePwd()"><i class="material-icons right">check</i>Changer le mot de passe</a>
+        </div>
+    </div>
+</div>
+
+<script type="application/ecmascript" src="app/tools.js"></script>
+<script type="application/ecmascript" src="app/model/classes.js"></script>
+<script type="application/ecmascript" src="app/model/model.js"></script>
+<script type="application/ecmascript" src="app/services/baseapiservice.js"></script>
+<script type="application/ecmascript" src="app/services/listapi.js"></script>
+<script type="application/ecmascript" src="app/services/userapi.js"></script>
+<script type="application/ecmascript" src="app/controllers/basecontroller.js"></script>
+<script type="application/ecmascript" src="app/controllers/baseformcontroller.js"></script>
+<script type="application/ecmascript" src="app/controllers/askresetpwd.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Connexion shopping</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="res/css/index.css"/>
+</head>
+<nav>
+    <div class="nav-wrapper">
+        <a href="javascript:void(0);" onclick="window.location.replace('login.html')" class="brand-logo" id="titleSite"></a>
+        <a href="javascript:void(0);" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="javascript:void(0);" onclick="window.location.replace('login.html')">Connexion</a></li>
+            <li><a href="javascript:void(0);" onclick="window.location.replace('register.html')">S'enregistrer</a></li>
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li ><a href="javascript:void(0);" onclick="window.location.replace('login.html')">Connexion</a></li>
+    <li><a href="javascript:void(0);" onclick="window.location.replace('register.html')">S'enregistrer</a></li>
+</ul>
+<body>
+<div class="container">
+    <blockquote id="message">
+
+    </blockquote>
+</div>
+
+<script type="application/ecmascript" src="app/tools.js"></script>
+<script type="application/ecmascript" src="app/model/classes.js"></script>
+<script type="application/ecmascript" src="app/model/model.js"></script>
+<script type="application/ecmascript" src="app/services/baseapiservice.js"></script>
+<script type="application/ecmascript" src="app/services/listapi.js"></script>
+<script type="application/ecmascript" src="app/services/userapi.js"></script>
+<script type="application/ecmascript" src="app/controllers/basecontroller.js"></script>
+<script type="application/ecmascript" src="app/controllers/baseformcontroller.js"></script>
+<script type="application/ecmascript" src="app/controllers/confirm.js"></script>
+</body>
+</html>

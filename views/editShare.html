@@ -1,0 +1,27 @@
+<div class="container">
+    <h3 id="editTitleShare">Partager l'artcile <span id="nameListShare"></span></h3>
+    <div id="formEditShare">
+        <div class="row">
+            <form class="col s12">
+                <div class="input-field col s6">
+                    <input id="fieldUserShare" type="text" class="validate">
+                    <label for="fieldUserShare" class="active">Nom de l'utilisateur</label>
+                </div>
+                <div class="input-field col s6">
+                    <div class="switch">
+                        <label>
+                            Non
+                            <input type="checkbox" onchange="" id="checkedModifList">
+                            <span class="lever"></span>
+                            Oui
+                        </label>
+                    </div>
+                    <label for="checkedModifList" class="active">Modification</label>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <button class="waves-effect waves-light btn" onclick="editShareController.save()"><i class="material-icons right">check</i>Enregistrer</button>
+        </div>
+    </div>
+</div>

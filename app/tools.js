@@ -56,5 +56,6 @@ function getParameterByName(name) {
 
 function logout(){
     sessionStorage.removeItem("token")
+    sessionStorage.removeItem("isAdmin")
     window.location.replace("login.html")
 }

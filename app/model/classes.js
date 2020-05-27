@@ -24,7 +24,21 @@ class Share{
 }
 
 class User{
-    constructor(login) {
+    constructor(login,validate) {
         this.login = login
+        this.validate = validate
+    }
+}
+
+class Role{
+    construction(name){
+        this.name = name
+    }
+}
+
+class User_Role{
+    constructor(user_id,role_id) {
+        this.user_id = user_id
+        this.role_id = role_id
     }
 }

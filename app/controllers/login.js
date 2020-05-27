@@ -10,6 +10,7 @@ class LoginController extends BaseFormController {
             this.svc.authenticate(login, password)
                 .then(res => {
                     sessionStorage.setItem("token", res.token)
+                    sessionStorage.setItem("isAdmin", res.isAdmin)
                     window.location.replace("index.html")
                 })
                 .catch(err => {

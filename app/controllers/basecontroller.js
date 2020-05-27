@@ -1,6 +1,7 @@
 class BaseController {
     constructor(secured) {
         if (secured) { this.checkAuthentication() }
+        this.checkAdmin()
         M.AutoInit();
         this.setBackButtonView('index')
         this.model = new Model()
@@ -12,6 +13,12 @@ class BaseController {
     checkAuthentication(){
         if(sessionStorage.getItem('token') === null){
             window.location.replace("login.html")
+        }
+    }
+    checkAdmin(){
+        if(sessionStorage.getItem('isAdmin') === "true"){
+            $("#isAdmin").style.display = 'block'
+            $("#isAdminMobile").style.display = 'block'
         }
     }
     displayConfirmDelete(object, onclick) {
@@ -60,6 +67,8 @@ class BaseController {
         $("#listSharedMobile").classList.remove('active')
         $("#account").classList.remove('active')
         $("#accountMobile").classList.remove('active')
+        $("#isAdmin").classList.remove('active')
+        $("#isAdminMobile").classList.remove('active')
 
         $(`#${active}`).classList.add('active')
         $(`#${active}Mobile`).classList.add('active')

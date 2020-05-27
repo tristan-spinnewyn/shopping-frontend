@@ -15,6 +15,7 @@
         <a href="javascript:void(0);" onclick="navigate('index')" class="brand-logo" id="titleSite"></a>
         <a href="javascript:void(0);" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
+            <li id="isAdmin" style="display:none"><a href="javascript:void(0);" onclick="navigate('admin')">Admin</a></li>
             <li class="active" id="enCours"><a href="javascript:void(0);" onclick="navigate('index')">Liste</a></li>
             <li id="listShare"><a href="javascript:void(0);" onclick="navigate('shareIndex')">Liste partagé</a></li>
             <li id="listShared"><a href="javascript:void(0);" onclick="navigate('sharedIndex')">Accès aux autres listes</a></li>
@@ -25,6 +26,7 @@
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
+    <li id="isAdminMobile" style="display:none"><a href="javascript:void(0);" onclick="navigate('admin')">Admin</a></li>
     <li id="enCoursMobile"><a href="javascript:void(0);"  onclick="navigate('index')">Liste</a></li>
     <li id="listShareMobile"><a href="javascript:void(0);" onclick="navigate('shareIndex')">Liste partagé</a></li>
     <li id="listSharedMobile"><a href="javascript:void(0);" onclick="navigate('sharedIndex')">Accès aux autres listes</a></li>
@@ -51,12 +53,14 @@
     <script type="application/ecmascript" src="app/model/sharedmodel.js"></script>
     <script type="application/ecmascript" src="app/model/sharemodel.js"></script>
     <script type="application/ecmascript" src="app/model/usermodel.js"></script>
+    <script type="application/ecmascript" src="app/model/adminmodel.js"></script>
     <script type="application/ecmascript" src="app/services/baseapiservice.js"></script>
     <script type="application/ecmascript" src="app/services/listapi.js"></script>
     <script type="application/ecmascript" src="app/services/itemapi.js"></script>
     <script type="application/ecmascript" src="app/services/userapi.js"></script>
     <script type="application/ecmascript" src="app/services/shareapi.js"></script>
     <script type="application/ecmascript" src="app/services/sharedapi.js"></script>
+    <script type="application/ecmascript" src="app/services/adminapi.js"></script>
     <script type="application/ecmascript" src="app/controllers/basecontroller.js"></script>
     <script type="application/ecmascript" src="app/controllers/baseformcontroller.js"></script>
     <script>navigate("index")</script>

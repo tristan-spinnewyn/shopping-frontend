@@ -10,15 +10,17 @@ class AdminUserController extends BaseController {
     }
 
     async displayAllUsers(){
+        let search = $("#search-user").value
         let content=""
         this.tableAllUsers.style.display = "none"
         try{
-            for(const user of await this.model.getAllUsers()){
-                let valid = ""
-                if(user.validate){
-                    valid = "checked"
-                }
-                content += `<tr><td>${user.login}</td>
+            if(search == ""){
+                for(const user of await this.model.getAllUsers()){
+                    let valid = ""
+                    if(user.validate){
+                        valid = "checked"
+                    }
+                    content += `<tr><td>${user.login}</td>
                             <td></td>
                             <td><div class="switch">
                                 <label>
@@ -30,7 +32,28 @@ class AdminUserController extends BaseController {
                               </div>
                             </td>
                             </tr>`
+                }
+            }else{
+                for(const user of await this.model.searchUser(search)){
+                    let valid = ""
+                    if(user.validate){
+                        valid = "checked"
+                    }
+                    content += `<tr><td>${user.login}</td>
+                            <td></td>
+                            <td><div class="switch">
+                                <label>
+                                  Non
+                                  <input type="checkbox" ${valid} onchange="" id="validUser-${user.id}">
+                                  <span class="lever"></span>
+                                  Oui
+                                </label>
+                              </div>
+                            </td>
+                            </tr>`
+                }
             }
+
             this.tableBodyAllUsers.innerHTML = content
             this.tableAllUsers.style.display = "block"
         }catch (e) {

@@ -9,7 +9,7 @@
     <div class="col s8">
         <div class="input-field">
             <i class="material-icons prefix">search</i>
-            <input type="text" placeholder="search" id="search-user" onchange="adminUserController.displayAllUsers()">
+            <input type="text" placeholder="search" id="search-user" onkeyup="adminUserController.displayAllUsers()">
         </div>
         <div>
             <table id="tableAllUsers" class="striped" style="display: none">

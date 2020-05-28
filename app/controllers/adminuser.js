@@ -17,7 +17,7 @@ class AdminUserController extends BaseController {
             if(search == ""){
                 for(const user of await this.model.getAllUsers()){
                     let valid = ""
-                    if(user.validate){
+                    if(user.active){
                         valid = "checked"
                     }
                     content += `<tr><td>${user.login}</td>
@@ -25,7 +25,7 @@ class AdminUserController extends BaseController {
                             <td><div class="switch">
                                 <label>
                                   Non
-                                  <input type="checkbox" ${valid} onchange="" id="validUser-${user.id}">
+                                  <input type="checkbox" ${valid} onchange="adminUserController.activate(${user.id})" id="validUser-${user.id}">
                                   <span class="lever"></span>
                                   Oui
                                 </label>
@@ -44,7 +44,7 @@ class AdminUserController extends BaseController {
                             <td><div class="switch">
                                 <label>
                                   Non
-                                  <input type="checkbox" ${valid} onchange="" id="validUser-${user.id}">
+                                  <input type="checkbox" ${valid} onchange="adminUserController.activate(${user.id})" id="validUser-${user.id}">
                                   <span class="lever"></span>
                                   Oui
                                 </label>
@@ -60,6 +60,16 @@ class AdminUserController extends BaseController {
             console.log(e)
             this.displayServiceError()
         }
+    }
+
+    async activate(user_id){
+        this.model.activate(user_id)
+            .then(res =>{
+                if(res.status === 200)
+                    this.toast("Le statut du compte a bien été modifier")
+                else
+                    this.toast("Une erreur est survenue.")
+            })
     }
 }
 window.adminUserController = new AdminUserController()

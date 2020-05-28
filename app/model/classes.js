@@ -24,9 +24,10 @@ class Share{
 }
 
 class User{
-    constructor(login,validate) {
+    constructor(login,validate,active) {
         this.login = login
         this.validate = validate
+        this.active = active
     }
 }
 

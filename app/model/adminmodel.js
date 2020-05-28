@@ -18,4 +18,8 @@ class AdminModel{
         }
         return users
     }
+
+    async activate(user_id){
+        return await this.api.activate(user_id)
+    }
 }

@@ -14,4 +14,21 @@ class AdminAPI extends BaseAPIService{
     activate(user_id){
         return fetch(`${this.url}/user/active/${user_id}`,{headers: this.headers})
     }
+
+    getById(id){
+        return fetchJSON(`${this.url}/user/${id}`,this.token)
+    }
+
+    updateUser(user){
+        this.headers.set('Content-Type','application/json')
+        return fetch(`${this.url}/user`,{
+            method:'PUT',
+            headers: this.headers,
+            body:JSON.stringify(user)
+        })
+    }
+
+    sendTokenPwd(user_id){
+        return fetch(`${this.url}/user/${user_id}/resetPwd`,{headers: this.headers})
+    }
 }

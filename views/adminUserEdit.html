@@ -1,0 +1,49 @@
+<div class="container">
+    <h3 id="editTitleUser">Modifier un utilisateur</h3>
+    <div id="formEditUser">
+        <div class="row">
+            <form class="col s12">
+                <div class="input-field col s12">
+                    <input id="fieldEmail" type="text" class="validate">
+                    <label for="fieldEmail" class="active">Email</label>
+                </div>
+                <div class="input-field col s12">
+                    <div class="col s12">Mot de passe:</div>
+                    <a href="javascript:void(0)" onclick="adminUserEditController.sendTokenPwd()">Cliquez ici pour envoyer un email de réintialisation de mot de passe.</a>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <button class="waves-effect waves-light btn" onclick="adminUserEditController.save()"><i class="material-icons right">check</i>Enregistrer</button>
+        </div>
+    </div>
+    <h3>Gestion des roles de l'utilisateur</h3>
+    <div id="formEditRole">
+        <div class="row">
+            <form class="col s12">
+                <div class="input-field col s6">
+                    <select id="fieldRoleSelect"></select>
+                    <label for="fieldRoleSelect">Role:</label>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <button class="waves-effect waves-light btn" onclick="adminUserEditController.addRole()"><i class="material-icons right">check</i>Ajouter un role</button>
+        </div>
+    </div>
+    <div id="lstRole">
+        <div class="row">
+            <div>
+                <table id="tableAllRoles" class="striped">
+                    <thead>
+                    <tr><th>Role</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableBodyAllRoles">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

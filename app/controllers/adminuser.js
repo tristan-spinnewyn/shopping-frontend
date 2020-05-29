@@ -21,7 +21,7 @@ class AdminUserController extends BaseController {
                         valid = "checked"
                     }
                     content += `<tr><td>${user.login}</td>
-                            <td></td>
+                            <td><button class="waves-effect waves-light btn" onclick="adminUserController.updateUser(${user.id})">Modifier</button></td>
                             <td><div class="switch">
                                 <label>
                                   Non
@@ -40,7 +40,7 @@ class AdminUserController extends BaseController {
                         valid = "checked"
                     }
                     content += `<tr><td>${user.login}</td>
-                            <td></td>
+                            <td><button class="waves-effect waves-light btn" onclick="adminUserController.updateUser(${user.id})">Modifier</button></td>
                             <td><div class="switch">
                                 <label>
                                   Non
@@ -70,6 +70,25 @@ class AdminUserController extends BaseController {
                 else
                     this.toast("Une erreur est survenue.")
             })
+    }
+
+    async updateUser(user_id){
+        try{
+            const object = await this.model.getUser(user_id)
+            if(object === undefined){
+                this.displayServiceError()
+                return
+            }
+            if(object === null){
+                this.displayNotFoundError()
+                return
+            }
+            this.selectedUser= object
+            navigate("adminUserEdit")
+        }catch (e) {
+            console.log(e)
+            this.displayServiceError()
+        }
     }
 }
 window.adminUserController = new AdminUserController()

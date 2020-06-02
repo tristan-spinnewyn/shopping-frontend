@@ -28,7 +28,7 @@ class ListModel{
     }
 
     insert(list){
-        return this.api.insert(list).then(res =>res.status)
+        return this.api.insert(list)
     }
 
     update(list){

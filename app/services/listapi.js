@@ -14,11 +14,18 @@ class ListAPI extends BaseAPIService{
     }
     insert(list){
         this.headers.set('Content-Type','Application/json')
-        return fetch(this.url,{
+        return new Promise((resolve,reject) => fetch(this.url,{
             method:'POST',
             headers: this.headers,
             body:JSON.stringify(list)
-        })
+        }).then(res=>{
+            if(res.status === 200){
+                resolve(res.json())
+            }else{
+                reject(res.status)
+            }
+        })).catch(err => reject(err))
+
     }
     update(list){
         this.headers.set('Content-Type','application/json')

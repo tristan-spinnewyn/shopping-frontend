@@ -24,7 +24,9 @@ class EditListController extends BaseFormController{
                         this.displayServiceError()
                     }
                 }else{
-                    if(await this.model.insert(new List(shop))===200){
+                    let id = await this.model.insert(new List(shop))
+                    let list = await this.model.getList(id.id)
+                    if(list !== undefined || list !== null){
                         this.toast("La liste a bien été inséré")
                         navigate('index')
                     }else{

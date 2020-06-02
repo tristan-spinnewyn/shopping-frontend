@@ -6,17 +6,18 @@ class IndexController extends BaseController {
         this.tableAllLists = $("#tableAllLists")
         this.tableBodyAllLists = $("#tableBodyAllLists")
         this.model = new ListModel()
+        this.modelItem = new ItemModel()
         this.displayAllList()
     }
 
-    async displayAllList(){
-        let content=""
+    async displayAllList() {
+        let content = ""
         this.tableAllLists.style.display = "none"
-        try{
-            for(const list of await this.model.getAllList()){
+        try {
+            for (const list of await this.model.getAllList()) {
                 const date = list.date.toLocaleDateString()
                 let terminer = "";
-                if(list.archived){
+                if (list.archived) {
                     terminer = "checked"
                 }
                 content += `<tr><td>${list.shop}</td>
@@ -39,71 +40,78 @@ class IndexController extends BaseController {
             }
             this.tableBodyAllLists.innerHTML = content
             this.tableAllLists.style.display = "block"
-        }catch(err){
+        } catch (err) {
             console.log(err)
             this.displayServiceError()
         }
     }
 
-    async edit(id){
-        try{
+    async edit(id) {
+        try {
             const object = await this.model.getList(id)
-            if(object === undefined){
+            if (object === undefined) {
                 this.displayServiceError()
                 return
             }
-            if(object === null){
+            if (object === null) {
                 this.displayNotFoundError()
                 return
             }
-            this.selectedList= object
+            this.selectedList = object
             navigate("editList")
-        }catch(err){
+        } catch (err) {
             console.log(err)
             this.displayServiceError()
         }
     }
 
-    undoDelete(){
-        if(this.deletedList){
-            this.model.insert(this.deletedList).then(status=>{
-                if(status == 200){
-                    this.deletedList = null
-                    this.displayUndoDone()
-                    this.displayAllList()
-                }
-            }).catch(_ =>{
-                this.displayServiceError()
-            })
-        }
-    }
-
-    async share(id){
-        try{
-            const object = await this.model.getList(id)
-            if(object === undefined){
+    async undoDelete() {
+        if (this.deletedList) {
+            let id = await this.model.insert(this.deletedList)
+            let list = await this.model.getList(id.id)
+            if(list === undefined || list === null){
                 this.displayServiceError()
                 return
             }
-            if(object === null){
+            this.deletedList = null
+            this.displayUndoDone()
+            this.displayAllList()
+            for (const item of this.deletedListItem) {
+                item.list_id = list.id
+                await this.modelItem.insert(item)
+            }
+
+        }
+    }
+
+    async share(id) {
+        try {
+            const object = await this.model.getList(id)
+            if (object === undefined) {
+                this.displayServiceError()
+                return
+            }
+            if (object === null) {
                 this.displayNotFoundError()
                 return
             }
-            this.selectedList= object
+            this.selectedList = object
             navigate("editShare")
-        }catch(err){
+        } catch (err) {
             console.log(err)
             this.displayServiceError()
         }
     }
 
-    async displayConfirmDelete(id){
-        try{
+    async displayConfirmDelete(id) {
+        try {
             const list = await this.model.getList(id)
-            super.displayConfirmDelete(list.shop, async()=>{
-                switch(await this.model.delete(id)){
+            const items = await this.modelItem.getAllItems(list)
+            super.displayConfirmDelete(list.shop, async () => {
+                switch (await this.model.delete(id)) {
                     case 200:
                         this.deletedList = list
+                        this.deletedListItem = items
                         this.displayDeletedMessage("indexController.undoDelete()")
                         break
                     case 404:
@@ -114,45 +122,45 @@ class IndexController extends BaseController {
                 }
                 this.displayAllList()
             })
-        }catch(err){
+        } catch (err) {
             console.log(err)
             this.displayServiceError()
         }
     }
 
-    async archiveList(id){
+    async archiveList(id) {
         const list = await this.model.getList(id);
-        if($(`#archiveListForm-${id}`).checked === true){
+        if ($(`#archiveListForm-${id}`).checked === true) {
             list.archived = true
-        }else{
+        } else {
             list.archived = false
         }
-        try{
-            if(await this.model.update(list) === 200){
+        try {
+            if (await this.model.update(list) === 200) {
                 this.toast("La liste a bien été modifié.")
-            }else{
+            } else {
                 this.displayServiceError()
             }
-        }catch (e) {
+        } catch (e) {
             console.log(e)
             this.displayServiceError()
         }
     }
 
-    async seeItem(id){
-        try{
+    async seeItem(id) {
+        try {
             const object = await this.model.getList(id)
-            if(object === undefined){
+            if (object === undefined) {
                 this.displayServiceError()
                 return
             }
-            if(object === null){
+            if (object === null) {
                 this.displayNotFoundError()
                 return
             }
-            this.selectedList= object
+            this.selectedList = object
             navigate("itemIndex")
-        }catch(err){
+        } catch (err) {
             console.log(err)
             this.displayServiceError()
         }

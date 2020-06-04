@@ -22,7 +22,7 @@ class ItemSharedIndexController extends BaseController{
         this.tableAllItems.style.display = "none"
         try{
             const share = await this.model.getShare(this.list.id)
-            if(this.list.archived || share.rule === 2){
+            if(this.list.archived || share.rule !== 2){
                 $("#addItemShare").style.display = 'none'
             }
             for(const item of await this.model.getAllItem(this.list.id)){

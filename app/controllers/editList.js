@@ -29,13 +29,15 @@ class EditListController extends BaseFormController{
                     if(list !== undefined || list !== null){
                         this.toast("La liste a bien été inséré")
                         navigate('index')
-                    }else{
-                        this.displayServiceError()
                     }
                 }
             }catch (e) {
+                if(e === 401){
+                    this.toast("Vous ne pouvez pas ajouter de liste tant que l'ancienne n'est pas archivé. Si vous voulez avoir plusieurs liste active vous pouvez devenir membre prenium!")
+                }else{
+                    this.displayServiceError()
+                }
                 console.log(e)
-                this.displayServiceError()
             }
         }
     }

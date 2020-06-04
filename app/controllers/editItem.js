@@ -1,7 +1,7 @@
-class EditItemController extends BaseFormController{
+class EditItemController extends BaseFormController {
     constructor() {
         super(true);
-        if(itemIndexController.selectedItem){
+        if (itemIndexController.selectedItem) {
             self.item = itemIndexController.selectedItem
             itemIndexController.selectedItem = null
             $("#editTitleItem").innerText = self.item.label
@@ -12,30 +12,37 @@ class EditItemController extends BaseFormController{
         this.model = new ItemModel()
     }
 
-    async save(){
-        let label = this.validateRequiredField("#fieldLabelItem","Nom de l'article")
-        let quantity = this.validateRequiredField("#fieldItemQuantity","quantité")
-        if(label != null && quantity != null){
-            try{
-                if(self.item){
+    async save() {
+        let label = this.validateRequiredField("#fieldLabelItem", "Nom de l'article")
+        let quantity = this.validateRequiredField("#fieldItemQuantity", "quantité")
+        if (label != null && quantity != null) {
+            try {
+                if (self.item) {
                     self.item.label = label
                     self.item.quantity = quantity
-                    if(await this.model.update(self.item) === 200){
+                    let status = await this.model.update(self.item)
+                    if (status === 200) {
                         this.toast("L'item a bien été modifié")
                         self.item = null
                         navigate('itemIndex')
-                    }else{
+                    } else if(status === 401){
+                        this.toast("Cette liste a été archivé, il n'est pas possible de modifier un item")
+                    }else {
                         this.displayServiceError()
                     }
-                }else{
-                    if(await this.model.insert(new Item(label,quantity,false,itemIndexController.list.id)) === 200){
-                        this.toast("La liste a bien été inséré")
+                } else {
+                    let status = await this.model.insert(new Item(label, quantity, false, itemIndexController.list.id))
+                    if (status === 200) {
+                        this.toast("L'item a bien été inséré")
                         navigate('itemIndex')
+                    } else if (status === 401) {
+                        this.toast("Cette liste a été archivé,il n'est pas possible d'ajouter d'item")
                     }else{
                         this.displayServiceError()
                     }
+
                 }
-            }catch (e) {
+            } catch (e) {
                 console.log(e)
                 this.displayServiceError()
             }

@@ -26,10 +26,9 @@ class ItemIndexController extends BaseController {
                 if (item.checked) {
                     checked = "checked"
                 }
-                content += `<tr>
-                                <td>${item.label}</td>
-                                <td>${item.quantity}</td>
-                                <td><div class="switch">
+                let editContent = ""
+                if(!this.list.archived){
+                    editContent += `<td><div class="switch">
                                     <label>
                                       Non
                                       <input type="checkbox" ${checked} onchange="itemIndexController.check(${item.id})" id="checkItemForm-${item.id}">
@@ -41,7 +40,23 @@ class ItemIndexController extends BaseController {
                                     <button class="btn" onclick="itemIndexController.displayConfirmDelete(${item.id})"><i class="material-icons">delete</i></button>
                                     <button class="btn" onclick="itemIndexController.edit(${item.id})"><i class="material-icons">edit</i></button>
                                 </td>
-                            </tr>`
+                            `
+                }else{
+                    if(item.checked){
+                        editContent = `<td>Oui</td>`
+                    }else{
+                        editContent = `<td>Non</td>`
+                    }
+
+                }
+                content += `<tr>
+                        <td>${item.label}</td>
+                        <td>${item.quantity}</td>
+                        ${editContent}
+                    </tr>`
+            }
+            if(this.list.archived){
+                $("#addItem").style.display = 'none'
             }
             this.tableBodyAllItem.innerHTML = content
             this.tableAllItems.style.display = 'block'
@@ -79,11 +94,15 @@ class ItemIndexController extends BaseController {
         }
 
         try{
-            if(await this.model.update(item) === 200){
+            let status = await this.model.update(item)
+            if(status === 200){
                 if(item.checked)
                     this.toast("L'item a bien été validé")
                 else
                     this.toast("Annulation de l'item fait")
+            }else if(status === 401) {
+                this.toast("Cette liste a été archivé il n'est donc pas possible de modifier les items")
+                this.displayAllItems()
             }else{
                 this.displayServiceError()
             }
@@ -116,6 +135,9 @@ class ItemIndexController extends BaseController {
                         this.deletedItem = item
                         this.displayDeletedMessage("itemIndexController.undoDelete()")
                         break
+                    case 401:
+                        this.toast("Cette liste a été archivé, il n'est donc pas possible de la modifier les items")
+                        break;
                     case 404:
                         this.displayNotFoundError()
                         break

@@ -22,13 +22,16 @@ class ItemSharedIndexController extends BaseController{
         this.tableAllItems.style.display = "none"
         try{
             const share = await this.model.getShare(this.list.id)
+            if(this.list.archived || share.rule === 2){
+                $("#addItemShare").style.display = 'none'
+            }
             for(const item of await this.model.getAllItem(this.list.id)){
                 let checked = ""
                 let editContent = ""
                 if(item.checked){
                     checked = "checked"
                 }
-                if(share.rule === 2){
+                if(share.rule === 2 && !this.list.archived){
                     editContent = `<td><div class="switch">
                                     <label>
                                       Non
@@ -47,7 +50,7 @@ class ItemSharedIndexController extends BaseController{
                     }else{
                         editContent = `<td>Non</td>`
                     }
-                    $("#addItemShare").style.display = 'none'
+
                 }
                 content += `<tr>
                         <td>${item.label}</td>

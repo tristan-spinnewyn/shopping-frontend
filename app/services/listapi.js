@@ -24,7 +24,7 @@ class ListAPI extends BaseAPIService{
             }else{
                 reject(res.status)
             }
-        })).catch(err => reject(err))
+        }).catch(err => reject(err)))
 
     }
     update(list){

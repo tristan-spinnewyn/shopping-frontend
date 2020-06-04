@@ -136,9 +136,13 @@ class IndexController extends BaseController {
             list.archived = false
         }
         try {
-            if (await this.model.update(list) === 200) {
+            let status = await this.model.update(list)
+            if (status === 200) {
                 this.toast("La liste a bien été modifié.")
-            } else {
+            } else if(status === 401){
+                this.toast("Une liste est toujours en cours, vous ne pouvez donc pas en désarchivé une, pour ceci il vous faut devenir prenium")
+                this.displayAllList()
+            }else{
                 this.displayServiceError()
             }
         } catch (e) {

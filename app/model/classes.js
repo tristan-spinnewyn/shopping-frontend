@@ -43,3 +43,10 @@ class User_Role{
         this.role_id = role_id
     }
 }
+
+class Prenium{
+    constructor(nom,prenom) {
+        this.nom = nom
+        this.prenom = prenom
+    }
+}

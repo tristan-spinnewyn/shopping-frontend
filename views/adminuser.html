@@ -11,6 +11,10 @@
             <i class="material-icons prefix">search</i>
             <input type="text" placeholder="search" id="search-user" onkeyup="adminUserController.displayAllUsers()">
         </div>
+        <label>
+            <input type="checkbox" id="preniumAlone" onchange="adminUserController.displayAllUsers()"/>
+            <span>Voir seulement les comptes abonnés</span>
+        </label>
         <div>
             <table id="tableAllUsers" class="striped" style="display: none">
                 <thead>

@@ -13,9 +13,15 @@ class AdminUserController extends BaseController {
         let search = $("#search-user").value
         let content=""
         this.tableAllUsers.style.display = "none"
+        let lstUsers
         try{
             if(search == ""){
-                for(const user of await this.model.getAllUsers()){
+                if($("#preniumAlone").checked){
+                    lstUsers = await this.model.getAbonnee()
+                }else{
+                    lstUsers = await this.model.getAllUsers()
+                }
+                for(const user of lstUsers){
                     let valid = ""
                     if(user.active){
                         valid = "checked"
@@ -34,7 +40,12 @@ class AdminUserController extends BaseController {
                             </tr>`
                 }
             }else{
-                for(const user of await this.model.searchUser(search)){
+                if ($("#preniumAlone").checked) {
+                    lstUsers = await this.model.searchAbonnee(search)
+                } else {
+                    lstUsers = await this.model.searchUser(search)
+                }
+                for(const user of lstUsers){
                     let valid = ""
                     if(user.validate){
                         valid = "checked"

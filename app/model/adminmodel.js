@@ -11,6 +11,14 @@ class AdminModel{
         return users
     }
 
+    async getAbonnee(){
+        let users = []
+        for(let user of await this.api.getAbonnee()){
+            users.push(Object.assign(new User(),user))
+        }
+        return users
+    }
+
     async getAllRole(){
         let roles= []
         for(let role of await this.api.getAllRole()){
@@ -30,6 +38,14 @@ class AdminModel{
     async searchUser(loginSearch){
         let users = []
         for(let user of await this.api.searchUser(loginSearch)){
+            users.push(Object.assign(new User(),user))
+        }
+        return users
+    }
+
+    async searchAbonnee(loginSearch){
+        let users = []
+        for(let user of await this.api.searchAbonnee(loginSearch)){
             users.push(Object.assign(new User(),user))
         }
         return users

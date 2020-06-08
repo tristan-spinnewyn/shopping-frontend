@@ -48,4 +48,12 @@ class AdminAPI extends BaseAPIService{
             body:JSON.stringify(user_role)
         })
     }
+
+    getAbonnee(){
+        return fetchJSON(`${this.url}/getAbonnee`,this.token)
+    }
+
+    searchAbonnee(loginSearch){
+        return fetchJSON(`${this.url}/searchAbonnee/${loginSearch}`,this.token)
+    }
 }

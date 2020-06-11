@@ -1,4 +1,4 @@
-const serviceBaseUrl = "http://localhost:3333"
+const serviceBaseUrl = "http://54.144.239.117:3333/"
 
 class BaseAPIService{
     constructor(url) {
